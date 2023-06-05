@@ -5,16 +5,25 @@ import { ValidationPipe } from '@nestjs/common';
 import { TransformInterceptor } from './utils/transform.interceptor';
 import { Transport } from '@nestjs/microservices';
 import helmet from 'helmet';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap(): Promise<any> {
-
   const app = await NestFactory.create(AppModule);
+
+  const config = new DocumentBuilder()
+    .setTitle('Transactions API')
+    .setDescription('API documentation for transactions')
+    .setVersion('1.0')
+    .build();
+
+  const document = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api', app, document);
 
   // Start the NestJS application
   await app.init();
 
   // Set the Express server to listen on a specific port
-  const port = 3000; // Replace with your desired port
+  const port = 8000; // Replace with your desired port
   app.listen(port, () => {
     console.log(`NestJS application is running on port ${port}`);
   });
@@ -44,7 +53,7 @@ async function bootstrap(): Promise<any> {
   const prismaService = app.get(PrismaDatabaseService);
   await prismaService.enableShutdownHooks(app);
 
-  await microservice.listenAsync();
+  await microservice.listen();
 }
 
 bootstrap().then(() => {

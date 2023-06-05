@@ -1,5 +1,3 @@
-// transactions.controller.ts
-
 import { Body, Controller, Get, Param, Post } from '@nestjs/common';
 import { Transaction } from '.prisma/client';
 import { TransactionsService } from './transaction.service';
