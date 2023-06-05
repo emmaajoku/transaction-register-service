@@ -26,10 +26,10 @@
 
 [Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
 
-## Installation
+# Installation
 
-# default requirement 
-```Ensure you have Mysql installed
+## default requirement 
+$ Ensure you have Mysql installed
 
 ## rabbitmq on mac
 
